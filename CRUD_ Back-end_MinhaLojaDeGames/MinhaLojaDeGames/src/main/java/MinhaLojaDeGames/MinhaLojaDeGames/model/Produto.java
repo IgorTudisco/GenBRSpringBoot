@@ -1,10 +1,17 @@
 package MinhaLojaDeGames.MinhaLojaDeGames.model;
 
+
+
+import java.util.List;
+
 import javax.persistence.Entity;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
@@ -17,7 +24,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 public class Produto {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
 	@NotEmpty(message = "nomeGame may not be empty")
@@ -29,8 +36,15 @@ public class Produto {
 	private Long preco;
 
 	@ManyToOne
-	@JsonIgnoreProperties("produtos")
+	@JsonIgnoreProperties({"produto", "listaDeProdutos"})
 	private Categoria categoria;
+	
+	@ManyToMany
+	@JoinTable(name = "tb_juncao",
+	joinColumns = @JoinColumn(name = "fk_produto"),
+	inverseJoinColumns = @JoinColumn(name = "fk_categoria"))
+	@JsonIgnoreProperties({"produto","listaDeProdutos"})
+	private List<Categoria> listaDeCategoria;
 
 	public Long getId() {
 		return id;
@@ -62,6 +76,14 @@ public class Produto {
 
 	public void setCategoria(Categoria categoria) {
 		this.categoria = categoria;
+	}
+
+	public List<Categoria> getListaDeCategoria() {
+		return listaDeCategoria;
+	}
+
+	public void setListaDeCategoria(List<Categoria> listaDeCategoria) {
+		this.listaDeCategoria = listaDeCategoria;
 	}
 
 }

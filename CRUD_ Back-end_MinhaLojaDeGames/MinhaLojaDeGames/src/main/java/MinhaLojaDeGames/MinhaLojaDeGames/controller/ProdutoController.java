@@ -1,6 +1,7 @@
 package MinhaLojaDeGames.MinhaLojaDeGames.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import MinhaLojaDeGames.MinhaLojaDeGames.model.Produto;
 import MinhaLojaDeGames.MinhaLojaDeGames.repository.ProdutoRepository;
+import MinhaLojaDeGames.MinhaLojaDeGames.service.ProdutoService;
 
 @RestController
 @RequestMapping("/produto") // EndPoint 
@@ -24,7 +26,10 @@ import MinhaLojaDeGames.MinhaLojaDeGames.repository.ProdutoRepository;
 public class ProdutoController {
 	
 	@Autowired
-	public ProdutoRepository repository;
+	private ProdutoRepository repository;
+	
+	@Autowired
+	private ProdutoService service;
 	
 	@GetMapping
 	public ResponseEntity<List<Produto>> GetAll(){
@@ -65,5 +70,30 @@ public class ProdutoController {
     {
         repository.deleteById(id);
     }
+    
+    @PutMapping("/produto/{id_produto}/categoria/{id_categoria}")
+    public ResponseEntity<Produto> batatinhas(@PathVariable Long id_produto,
+    		@PathVariable Long id_categoria){
+    	
+    	Optional<Produto> produtoCriado = service.novoItemCategorisado(id_produto, id_categoria);
+    	
+    	if (produtoCriado.isEmpty()) {
+			
+    		return ResponseEntity.badRequest().build();
+    		
+		} else {
+			
+			return ResponseEntity.ok(produtoCriado.get());
+
+		}
+    	
+    };
+    
+    
+    
+    
+    
+    
+    
 
 }

@@ -7,7 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
@@ -20,7 +20,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 public class Categoria {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
 	@NotEmpty(message = "Tipy may not be empty")
@@ -33,8 +33,11 @@ public class Categoria {
 
 	@OneToMany(mappedBy = "categoria")
 	@JsonIgnoreProperties("categoria")
-	private List<Produto> produtos;
+	private List<Produto> produto;
 
+	@ManyToMany(mappedBy = "listaDeCategoria")
+	private List<Produto> listaDeProdutos;
+	
 	public Long getId() {
 		return id;
 	}
@@ -60,11 +63,19 @@ public class Categoria {
 	}
 
 	public List<Produto> getProduto() {
-		return produtos;
+		return produto;
 	}
 
 	public void setProduto(List<Produto> produto) {
-		this.produtos = produto;
+		this.produto = produto;
+	}
+
+	public List<Produto> getListaDeProdutos() {
+		return listaDeProdutos;
+	}
+
+	public void setListaDeProdutos(List<Produto> listaDeProdutos) {
+		this.listaDeProdutos = listaDeProdutos;
 	}
 
 }
