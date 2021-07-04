@@ -4,9 +4,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name = "tb_produto")
@@ -14,22 +17,26 @@ public class Produto {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	private Long idProduto;
 
-	@NotEmpty(message = "nomeProduto may not be empty")
+	@NotEmpty(message = "Nome do produto may not be empty")
 	@Size(min = 5, max = 35)
 	private String nomeProduto;
 
-	@NotEmpty(message = "descricao may not be empty")
-	@Size(min = 5, max = 35)
+	@NotEmpty(message = "descrição may not be empty")
+	// @Size(min = 5, max = 35)
 	private String descricao;
 
-	public Long getId() {
-		return id;
+	@ManyToOne
+	@JsonIgnoreProperties({ "id", "listaDeProdutos" })
+	private Categoria categoria;
+
+	public Long getIdProduto() {
+		return idProduto;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+	public void setIdProduto(Long idProduto) {
+		this.idProduto = idProduto;
 	}
 
 	public String getNomeProduto() {
@@ -46,6 +53,14 @@ public class Produto {
 
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
+	}
+
+	public Categoria getCategoria() {
+		return categoria;
+	}
+
+	public void setCategoria(Categoria categoria) {
+		this.categoria = categoria;
 	}
 
 }
