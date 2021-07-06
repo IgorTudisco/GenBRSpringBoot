@@ -28,7 +28,7 @@ public class Produto {
 	private String descricao;
 
 	@ManyToOne
-	@JsonIgnoreProperties({ "id", "listaDeProdutos" })
+	@JsonIgnoreProperties({ "idCategoria", "listaDeProdutos" })
 	private Categoria categoria;
 
 	public Long getIdProduto() {

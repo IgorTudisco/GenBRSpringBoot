@@ -1,7 +1,5 @@
 package MinhaLojaDeGames.MinhaLojaDeGames.model;
 
-
-
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -25,7 +23,7 @@ public class Produto {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	private Long idProduto;
 
 	@NotEmpty(message = "nomeGame may not be empty")
 	@Size(min = 3, max = 10)
@@ -36,22 +34,20 @@ public class Produto {
 	private Long preco;
 
 	@ManyToOne
-	@JsonIgnoreProperties({"produto", "listaDeProdutos"})
+	@JsonIgnoreProperties({ "produto", "listaDeProdutos" })
 	private Categoria categoria;
-	
+
 	@ManyToMany
-	@JoinTable(name = "tb_juncao",
-	joinColumns = @JoinColumn(name = "fk_produto"),
-	inverseJoinColumns = @JoinColumn(name = "fk_categoria"))
-	@JsonIgnoreProperties({"produto","listaDeProdutos"})
+	@JoinTable(name = "tb_juncao", joinColumns = @JoinColumn(name = "fk_produto"), inverseJoinColumns = @JoinColumn(name = "fk_categoria"))
+	@JsonIgnoreProperties({ "produto", "listaDeProdutos" })
 	private List<Categoria> listaDeCategoria;
 
-	public Long getId() {
-		return id;
+	public Long getIdProduto() {
+		return idProduto;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+	public void setIdProduto(Long idProduto) {
+		this.idProduto = idProduto;
 	}
 
 	public String getNomeGame() {

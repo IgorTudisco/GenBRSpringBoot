@@ -21,7 +21,7 @@ public class Categoria {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	private Long idCategoria;
 
 	@NotEmpty(message = "Tipy may not be empty")
 	@Size(min = 3, max = 10)
@@ -37,13 +37,13 @@ public class Categoria {
 
 	@ManyToMany(mappedBy = "listaDeCategoria")
 	private List<Produto> listaDeProdutos;
-	
-	public Long getId() {
-		return id;
+
+	public Long getIdCategoria() {
+		return idCategoria;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+	public void setIdCategoria(Long idCategoria) {
+		this.idCategoria = idCategoria;
 	}
 
 	public String getTipy() {
