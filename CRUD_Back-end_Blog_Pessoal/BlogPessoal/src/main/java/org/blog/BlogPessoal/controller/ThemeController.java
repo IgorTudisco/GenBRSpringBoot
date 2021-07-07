@@ -26,7 +26,7 @@ public class ThemeController {
 	private ThemeRepository repository;
 
 	@GetMapping
-	public ResponseEntity<List<Theme>> gerAll() {
+	public ResponseEntity<List<Theme>> getAll() {
 
 		return ResponseEntity.ok(repository.findAll());
 
@@ -41,11 +41,11 @@ public class ThemeController {
 
 	};
 	
-	@GetMapping("/name/{name}")
-	public ResponseEntity<List<Theme>> getByName(@PathVariable String name) {
+	@GetMapping("/descricao/{descricao}")
+	public ResponseEntity<List<Theme>> getByName(@PathVariable String descricao) {
 
 		return ResponseEntity
-				.ok(repository.findAllByDescricaoContainingIgnoreCase(name));
+				.ok(repository.findAllByDescricaoContainingIgnoreCase(descricao));
 
 	};
 	

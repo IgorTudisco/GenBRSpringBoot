@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/postagens") // EndPoint 
-@CrossOrigin("*") // Assim ele irá aceitar qualquer API, seja angular ou outra
+@CrossOrigin(origins = "*", allowedHeaders = "*") // Vai liberar todos os Headers // Assim ele irá aceitar qualquer API, seja angular ou outra
 public class PostagemController {
 	
 	@Autowired
