@@ -17,7 +17,7 @@ import MinhaLojaDeGames.MinhaLojaDeGames.service.UsuarioService;
 
 @RestController
 @CrossOrigin(origins = "*", allowedHeaders = "*") // Vai liberar todos os Headers
-@RequestMapping("/usuarios")
+@RequestMapping("/usuario")
 public class UsuarioController {
 
 	@Autowired
