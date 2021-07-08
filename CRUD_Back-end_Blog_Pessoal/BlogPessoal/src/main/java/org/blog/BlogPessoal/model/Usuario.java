@@ -26,7 +26,7 @@ public class Usuario {
 
 	@NotNull
 	@Size(min = 10, max = 500)
-	private String usuario;
+	private String email;
 
 	public Long getId() {
 		return id;
@@ -52,12 +52,12 @@ public class Usuario {
 		this.senha = senha;
 	}
 
-	public String getUsuario() {
-		return usuario;
+	public String getEmail() {
+		return email;
 	}
 
-	public void setUsuario(String usuario) {
-		this.usuario = usuario;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 }

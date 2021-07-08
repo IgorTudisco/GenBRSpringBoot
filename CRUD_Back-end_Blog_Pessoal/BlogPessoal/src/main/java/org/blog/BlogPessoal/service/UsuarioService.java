@@ -49,12 +49,12 @@ public class UsuarioService {
 
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
-		Optional<Usuario> usuario = repositoryUsuario.findByUsuario(userLogin.get().getUsuario());
+		Optional<Usuario> usuario = repositoryUsuario.findByEmail(userLogin.get().getEmail());
 
 		if (usuario.isPresent()) {
 			if (encoder.matches(userLogin.get().getSenha(), usuario.get().getSenha())) {
 
-				String auth = userLogin.get().getUsuario() + ":" + userLogin.get().getSenha();
+				String auth = userLogin.get().getEmail() + ":" + userLogin.get().getSenha();
 
 				byte[] encodedAuth = Base64.encodeBase64(auth.getBytes(Charset.forName("US-ASCII")));
 

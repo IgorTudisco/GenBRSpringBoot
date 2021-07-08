@@ -26,9 +26,9 @@ public class UserDetailsServiceImplemente implements UserDetailsService{
 	 * @since 1.0
 	 */
 	@Override
-	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		Optional<Usuario> usuario = usuarioRepository.findByUsuario(username);
-		usuario.orElseThrow(() -> new UsernameNotFoundException(username + "not found. "));
+	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+		Optional<Usuario> usuario = usuarioRepository.findByEmail(email);
+		usuario.orElseThrow(() -> new UsernameNotFoundException(email + "not found. "));
 		
 		return usuario.map(UserDetailsImplements::new).get();
 	}

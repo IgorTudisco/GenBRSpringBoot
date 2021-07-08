@@ -2,6 +2,7 @@ package MinhaLojaDeGames.MinhaLojaDeGames.model;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 
 import javax.persistence.GeneratedValue;
@@ -31,7 +32,7 @@ public class Categoria {
 	@Size(min = 10, max = 100)
 	private String descricao;
 
-	@OneToMany(mappedBy = "categoria")
+	@OneToMany(mappedBy = "categoria", cascade = CascadeType.ALL)
 	@JsonIgnoreProperties("categoria")
 	private List<Produto> produto;
 
