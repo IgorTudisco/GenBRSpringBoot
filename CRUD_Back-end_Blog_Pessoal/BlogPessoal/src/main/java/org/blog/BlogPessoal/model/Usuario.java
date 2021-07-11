@@ -28,6 +28,18 @@ public class Usuario {
 	@Size(min = 10, max = 500)
 	private String email;
 
+	public Usuario() {
+		super();
+	}
+
+	public Usuario(@NotNull @Size(min = 2, max = 100) String nome, @NotNull @Size(min = 10, max = 500) String senha,
+			@NotNull @Size(min = 10, max = 500) String email) {
+		super();
+		this.nome = nome;
+		this.senha = senha;
+		this.email = email;
+	}
+
 	public Long getId() {
 		return id;
 	}
