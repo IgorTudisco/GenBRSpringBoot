@@ -1,7 +1,9 @@
 package org.blog.BlogPessoal.repository;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.util.Optional;
 import java.util.Set;
 
 import javax.validation.ConstraintViolation;
@@ -19,7 +21,7 @@ import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 class UsuarioRepositoryTest {
 	
-	public Usuario usuario;
+	public Usuario usuario = new Usuario("Zika", "jkdskhasdhskjdf", "zikaf24@gmail.com");
 	
 	public UsuarioRepository repositoryUsuario;
 
@@ -27,10 +29,9 @@ class UsuarioRepositoryTest {
 	private ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
 	Validator validator = factory.getValidator();
 	
-	@Test
-	public void start() {
+	@BeforeEach
+	void start() {
 
-		usuario = new Usuario("Zika", "jkdskhasdhskjdf", "zikaf24@gmail.com");
 		if(repositoryUsuario.findByEmail(usuario.getEmail()) != null) {
 			repositoryUsuario.save(usuario);
 		}
@@ -43,13 +44,17 @@ class UsuarioRepositoryTest {
 //		System.out.println(violacao.toString());
 //		assertTrue(violacao.isEmpty());
 //	}
-//
-//
-//	@Test
-//	void testValidaMetodo() {
-//		Set<ConstraintViolation<UsuarioRepository>> violacao = validator.validate(repositoryUsuario);
-//		System.out.println(violacao.toString());
-//		assertTrue(violacao.isEmpty());
-//	}
+
+
+	@Test
+	void findByEmail() throws Exception {
+
+		Optional<Usuario> okUsuario = repositoryUsuario.findByEmail(usuario.getEmail());
+		System.out.println(okUsuario.get().getEmail());
+		Boolean ok = okUsuario.get().getEmail() == "zikaf24@gmail.com";
+		Set<ConstraintViolation<Boolean>> violacao = validator.validate(ok);
+		System.out.println(violacao.toString());
+		assertTrue(violacao.isEmpty());
+	};
 
 }

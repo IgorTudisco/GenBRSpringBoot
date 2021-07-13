@@ -1,6 +1,5 @@
 package org.blog.BlogPessoal.repository;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
 import java.util.List;

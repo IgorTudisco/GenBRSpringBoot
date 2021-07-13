@@ -32,7 +32,7 @@ public class PostagemRepositoryTest {
 	@BeforeEach
 	public void start() {
 		postagem = new Postagem("Zika dá balada", "Blá blá blá blá !");
-		if(postagemRepositoryTest.findAllByTituloContainingIgnoreCase(postagem.getText()) == null) {
+		if(postagemRepositoryTest.findAllByTituloContainingIgnoreCase(postagem.getText()) != null) {
 			postagemRepositoryTest.save(postagem);
 		}
 	}

@@ -2,6 +2,8 @@ package org.blog.BlogPessoal.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.blog.BlogPessoal.model.Postagem;
 import org.blog.BlogPessoal.repository.PostagemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,7 +57,7 @@ public class PostagemController {
 	// você deverar passar o status de acordo a sua requi
 	
 	@PostMapping
-	public ResponseEntity<Postagem> post(@RequestBody Postagem postagem){
+	public ResponseEntity<Postagem> post(@Valid @RequestBody Postagem postagem){
 		
 		return ResponseEntity.status(HttpStatus.CREATED).body(repository.save(postagem));
 		
@@ -64,7 +66,7 @@ public class PostagemController {
 	// O metodo put é bem parecido com o post, porem tem as suas particuliaridades
 	
 	@PutMapping
-	public ResponseEntity<Postagem> put(@RequestBody Postagem postagem){
+	public ResponseEntity<Postagem> put(@Valid @RequestBody Postagem postagem){
 		
 		return ResponseEntity.status(HttpStatus.OK).body(repository.save(postagem));
 		

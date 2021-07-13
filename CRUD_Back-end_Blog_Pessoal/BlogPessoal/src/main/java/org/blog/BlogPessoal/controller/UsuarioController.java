@@ -3,6 +3,8 @@ package org.blog.BlogPessoal.controller;
 
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import org.blog.BlogPessoal.model.UserLogin;
 import org.blog.BlogPessoal.model.Usuario;
 import org.blog.BlogPessoal.service.UsuarioService;
@@ -30,7 +32,7 @@ public class UsuarioController {
 	 */
 	
 	@PostMapping("/logar")
-	public ResponseEntity<UserLogin> Autentication(@RequestBody Optional<UserLogin> userLogin){
+	public ResponseEntity<UserLogin> Autentication(@Valid @RequestBody Optional<UserLogin> userLogin){
 		
 		return serviceUsuario.logarUsuario(userLogin)
 				.map(resp -> ResponseEntity.ok(resp))
@@ -38,7 +40,7 @@ public class UsuarioController {
 	};
 	
 	@PostMapping("/cadastrar")
-	public ResponseEntity<Usuario> Autentication(@RequestBody Usuario usuario){
+	public ResponseEntity<Object> Autentication(@Valid @RequestBody Usuario usuario){
 		
 		return ResponseEntity.status(HttpStatus.CREATED)
 				.body(serviceUsuario.CadastrarUsuario(usuario));

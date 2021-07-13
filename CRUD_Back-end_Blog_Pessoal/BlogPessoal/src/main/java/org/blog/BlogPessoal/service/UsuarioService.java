@@ -25,14 +25,21 @@ public class UsuarioService {
 	 * @author igor
 	 * @since 1.0
 	 */
-	public Usuario CadastrarUsuario(Usuario usuario) {
+	public Optional<Object> CadastrarUsuario(Usuario usuario) {
 
-		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+		return repositoryUsuario.findByEmail(usuario.getEmail()).map(usuarioExistente -> {
+			return Optional.empty();
+		}).orElseGet(() -> {
 
-		String senhaEncoder = encoder.encode(usuario.getSenha());
-		usuario.setSenha(senhaEncoder);
+			BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
-		return repositoryUsuario.save(usuario);
+			String senhaCriptografada = encoder.encode(usuario.getSenha());
+
+			usuario.setSenha(senhaCriptografada);
+
+			return Optional.ofNullable(repositoryUsuario.save(usuario));
+
+		}); 
 
 	};
 

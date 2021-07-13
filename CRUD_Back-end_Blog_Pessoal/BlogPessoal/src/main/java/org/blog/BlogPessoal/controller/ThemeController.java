@@ -2,6 +2,8 @@ package org.blog.BlogPessoal.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.blog.BlogPessoal.model.Theme;
 import org.blog.BlogPessoal.repository.ThemeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,13 +52,13 @@ public class ThemeController {
 	};
 	
 	@PostMapping
-	public ResponseEntity<Theme> post(@RequestBody Theme theme){
+	public ResponseEntity<Theme> post(@Valid @RequestBody Theme theme){
 		
 		return ResponseEntity.status(HttpStatus.CREATED).body(repository.save(theme));
 	};
 	
 	@PutMapping
-	public ResponseEntity<Theme> put(@RequestBody Theme theme){
+	public ResponseEntity<Theme> put(@Valid @RequestBody Theme theme){
 		
 		return ResponseEntity.ok(repository.save(theme));
 		
